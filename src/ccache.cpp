@@ -248,6 +248,8 @@ guess_compiler(std::string_view path)
     return CompilerType::nvcc;
   } else if (name == "icl") {
     return CompilerType::icl;
+  } else if (name == "icx") {
+    return CompilerType::icx;
   } else if (name == "cl") {
     return CompilerType::msvc;
   } else {

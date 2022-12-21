@@ -37,6 +37,7 @@ enum class CompilerType {
   clang_cl,
   gcc,
   icl,
+  icx,
   msvc,
   nvcc,
   other
@@ -96,10 +97,10 @@ public:
   const std::string& temporary_dir() const;
   std::optional<mode_t> umask() const;
 
-  // Return true for Clang and clang-cl.
+  // Return true for Clang, clang-cl, and icx.
   bool is_compiler_group_clang() const;
 
-  // Return true for MSVC (cl.exe), clang-cl, and icl.
+  // Return true for MSVC (cl.exe), clang-cl, icl, and icx.
   bool is_compiler_group_msvc() const;
 
   std::string default_temporary_dir() const;
@@ -257,7 +258,8 @@ inline bool
 Config::is_compiler_group_clang() const
 {
   return m_compiler_type == CompilerType::clang
-         || m_compiler_type == CompilerType::clang_cl;
+         || m_compiler_type == CompilerType::clang_cl
+         || m_compiler_type == CompilerType::icx;
 }
 
 inline bool
@@ -265,7 +267,8 @@ Config::is_compiler_group_msvc() const
 {
   return m_compiler_type == CompilerType::msvc
          || m_compiler_type == CompilerType::clang_cl
-         || m_compiler_type == CompilerType::icl;
+         || m_compiler_type == CompilerType::icl
+         || m_compiler_type == CompilerType::icx;
 }
 
 inline bool
